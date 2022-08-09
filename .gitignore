@@ -18,3 +18,9 @@ cover.out
 /.tool-versions
 
 .DS_Store
+
+# Bazel build system
+/bazel-bin
+/bazel-out
+/bazel-provider-aws
+/bazel-testlogs
