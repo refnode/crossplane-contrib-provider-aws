@@ -1,0 +1,38 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "cognitoidentityprovider",
+    srcs = [
+        "cognitoidentityprovider.go",
+        "groupusermembership.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/cognitoidentityprovider",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_acm//types",
+        "@com_github_aws_aws_sdk_go_v2_service_cognitoidentityprovider//:cognitoidentityprovider",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)
+
+go_test(
+    name = "cognitoidentityprovider_test",
+    srcs = ["cognitoidentityprovider_test.go"],
+    embed = [":cognitoidentityprovider"],
+    deps = [
+        "//pkg/clients/mock/kube",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/test",
+        "@com_github_golang_mock//gomock",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)

@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cloudsearch",
+    srcs = ["cloudsearch.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/cloudsearch",
+    visibility = ["//visibility:public"],
+)

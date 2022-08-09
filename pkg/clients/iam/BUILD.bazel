@@ -1,0 +1,60 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "iam",
+    srcs = [
+        "accesskey.go",
+        "group.go",
+        "grouppolicyattachment.go",
+        "groupusermembership.go",
+        "iam.go",
+        "openidconnectprovider.go",
+        "policy.go",
+        "role.go",
+        "rolepolicyattachment.go",
+        "tags.go",
+        "user.go",
+        "userpolicyattachment.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/iam",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/iam/v1beta1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_iam//:iam",
+        "@com_github_aws_aws_sdk_go_v2_service_iam//types",
+        "@com_github_aws_aws_sdk_go_v2_service_sts//:sts",
+        "@com_github_aws_smithy_go//document",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+        "@com_github_mitchellh_copystructure//:copystructure",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+    ],
+)
+
+go_test(
+    name = "iam_test",
+    srcs = [
+        "openidconnectprovider_test.go",
+        "policy_test.go",
+        "role_test.go",
+        "tags_test.go",
+        "user_test.go",
+    ],
+    embed = [":iam"],
+    deps = [
+        "//apis/iam/v1beta1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go//aws",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_iam//:iam",
+        "@com_github_aws_aws_sdk_go_v2_service_iam//types",
+        "@com_github_aws_smithy_go//document",
+        "@com_github_crossplane_crossplane_runtime//pkg/test",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+    ],
+)

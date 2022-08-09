@@ -1,0 +1,53 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "certificateauthority",
+    srcs = ["controller.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/controller/acmpca/certificateauthority",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/acmpca/v1beta1",
+        "//apis/v1alpha1",
+        "//pkg/clients",
+        "//pkg/clients/acmpca",
+        "//pkg/features",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_acmpca//:acmpca",
+        "@com_github_aws_aws_sdk_go_v2_service_acmpca//types",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/connection",
+        "@com_github_crossplane_crossplane_runtime//pkg/controller",
+        "@com_github_crossplane_crossplane_runtime//pkg/event",
+        "@com_github_crossplane_crossplane_runtime//pkg/meta",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)
+
+go_test(
+    name = "certificateauthority_test",
+    srcs = ["controller_test.go"],
+    embed = [":certificateauthority"],
+    deps = [
+        "//apis/acmpca/v1beta1",
+        "//pkg/clients",
+        "//pkg/clients/acmpca",
+        "//pkg/clients/acmpca/fake",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_acmpca//:acmpca",
+        "@com_github_aws_aws_sdk_go_v2_service_acmpca//types",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/meta",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@com_github_crossplane_crossplane_runtime//pkg/test",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)

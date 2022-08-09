@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "resolverruleassociation",
+    srcs = ["resolverruleassociation.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/resolverruleassociation",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/route53resolver/manualv1alpha1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_route53resolver//:route53resolver",
+        "@com_github_aws_aws_sdk_go_v2_service_route53resolver//types",
+        "@com_github_crossplane_crossplane_runtime//pkg/meta",
+    ],
+)

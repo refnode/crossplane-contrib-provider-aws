@@ -1,0 +1,49 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "rds",
+    srcs = ["rds.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/rds",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/database/v1beta1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_rds//:rds",
+        "@com_github_aws_aws_sdk_go_v2_service_rds//types",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)
+
+go_test(
+    name = "rds_test",
+    srcs = ["rds_test.go"],
+    embed = [":rds"],
+    deps = [
+        "//apis/database/v1beta1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2_service_rds//:rds",
+        "@com_github_aws_aws_sdk_go_v2_service_rds//types",
+        "@com_github_aws_smithy_go//document",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_crossplane_crossplane_runtime//pkg/test",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/api/errors",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/runtime/schema",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)

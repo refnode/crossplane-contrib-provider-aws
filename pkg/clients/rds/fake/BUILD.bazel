@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fake",
+    srcs = ["fake.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/rds/fake",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_aws_aws_sdk_go_v2_service_rds//:rds"],
+)

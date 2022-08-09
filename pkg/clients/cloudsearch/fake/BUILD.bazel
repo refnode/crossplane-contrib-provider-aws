@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fake",
+    srcs = ["cloudsearch.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/cloudsearch/fake",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_aws_aws_sdk_go//aws",
+        "@com_github_aws_aws_sdk_go//aws/request",
+        "@com_github_aws_aws_sdk_go//service/cloudsearch",
+        "@com_github_aws_aws_sdk_go//service/cloudsearch/cloudsearchiface",
+    ],
+)

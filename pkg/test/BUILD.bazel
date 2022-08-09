@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "test",
+    srcs = ["crds.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/test",
+    visibility = ["//visibility:public"],
+)

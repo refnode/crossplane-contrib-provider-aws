@@ -1,0 +1,45 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "elasticache",
+    srcs = ["elasticache.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/elasticache",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/cache/v1alpha1",
+        "//apis/cache/v1beta1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_elasticache//:elasticache",
+        "@com_github_aws_aws_sdk_go_v2_service_elasticache//types",
+        "@com_github_aws_smithy_go//document",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+        "@com_github_mitchellh_copystructure//:copystructure",
+        "@com_github_pkg_errors//:errors",
+    ],
+)
+
+go_test(
+    name = "elasticache_test",
+    srcs = [
+        "elasticache_test.go",
+        "elasticcachecluster_test.go",
+    ],
+    embed = [":elasticache"],
+    deps = [
+        "//apis/cache/v1alpha1",
+        "//apis/cache/v1beta1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2_service_elasticache//:elasticache",
+        "@com_github_aws_aws_sdk_go_v2_service_elasticache//types",
+        "@com_github_aws_smithy_go//document",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+        "@com_github_pkg_errors//:errors",
+    ],
+)

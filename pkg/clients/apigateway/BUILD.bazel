@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "apigateway",
+    srcs = ["apigateway.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/apigateway",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_aws_aws_sdk_go//aws",
+        "@com_github_aws_aws_sdk_go//aws/request",
+        "@com_github_aws_aws_sdk_go//service/apigateway",
+        "@com_github_aws_aws_sdk_go//service/apigateway/apigatewayiface",
+        "@com_github_mattbaird_jsonpatch//:jsonpatch",
+    ],
+)

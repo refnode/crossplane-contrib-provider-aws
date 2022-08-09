@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "v1alpha3",
+    srcs = [
+        "doc.go",
+        "provider_types.go",
+        "register.go",
+        "zz_generated.deepcopy.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/apis/v1alpha3",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/runtime",
+        "@io_k8s_apimachinery//pkg/runtime/schema",
+        "@io_k8s_sigs_controller_runtime//pkg/scheme",
+    ],
+)

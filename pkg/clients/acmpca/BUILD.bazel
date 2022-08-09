@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "acmpca",
+    srcs = [
+        "certificateauthority.go",
+        "certificateauthoritypermission.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/acmpca",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/acmpca/v1beta1",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_acmpca//:acmpca",
+        "@com_github_aws_aws_sdk_go_v2_service_acmpca//types",
+    ],
+)
+
+go_test(
+    name = "acmpca_test",
+    srcs = ["certificateauthority_test.go"],
+    embed = [":acmpca"],
+    deps = [
+        "//apis/acmpca/v1beta1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2_service_acmpca//:acmpca",
+        "@com_github_aws_aws_sdk_go_v2_service_acmpca//types",
+        "@com_github_aws_smithy_go//document",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+    ],
+)

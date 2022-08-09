@@ -1,0 +1,50 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "cluster",
+    srcs = [
+        "setup.go",
+        "zz_controller.go",
+        "zz_conversions.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/controller/dax/cluster",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/dax/v1alpha1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go//aws/awserr",
+        "@com_github_aws_aws_sdk_go//service/dax",
+        "@com_github_aws_aws_sdk_go//service/dax/daxiface",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/controller",
+        "@com_github_crossplane_crossplane_runtime//pkg/event",
+        "@com_github_crossplane_crossplane_runtime//pkg/meta",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)
+
+go_test(
+    name = "cluster_test",
+    srcs = ["setup_test.go"],
+    embed = [":cluster"],
+    deps = [
+        "//apis/dax/v1alpha1",
+        "//pkg/clients",
+        "//pkg/clients/dax/fake",
+        "@com_github_aws_aws_sdk_go//aws/request",
+        "@com_github_aws_aws_sdk_go//service/dax",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/meta",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_crossplane_crossplane_runtime//pkg/test",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)

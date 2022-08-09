@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fake",
+    srcs = ["fake.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/apigateway/fake",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/clients/apigateway",
+        "@com_github_aws_aws_sdk_go//aws/request",
+        "@com_github_aws_aws_sdk_go//service/apigateway",
+    ],
+)

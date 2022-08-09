@@ -1,0 +1,33 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "elb",
+    srcs = ["elb.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/elasticloadbalancing/elb",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/elasticloadbalancing/v1alpha1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_elasticloadbalancing//:elasticloadbalancing",
+        "@com_github_aws_aws_sdk_go_v2_service_elasticloadbalancing//types",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+    ],
+)
+
+go_test(
+    name = "elb_test",
+    srcs = ["elb_test.go"],
+    embed = [":elb"],
+    deps = [
+        "//apis/elasticloadbalancing/v1alpha1",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_elasticloadbalancing//:elasticloadbalancing",
+        "@com_github_aws_aws_sdk_go_v2_service_elasticloadbalancing//types",
+        "@com_github_aws_smithy_go//document",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+    ],
+)

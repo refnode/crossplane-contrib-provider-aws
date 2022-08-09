@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "dbinstanceroleassociation",
+    srcs = [
+        "setup.go",
+        "zz_controller.go",
+        "zz_conversions.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/controller/rds/dbinstanceroleassociation",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/rds/v1alpha1",
+        "//apis/v1alpha1",
+        "//pkg/clients",
+        "//pkg/features",
+        "@com_github_aws_aws_sdk_go//aws",
+        "@com_github_aws_aws_sdk_go//aws/awserr",
+        "@com_github_aws_aws_sdk_go//service/rds",
+        "@com_github_aws_aws_sdk_go//service/rds/rdsiface",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/connection",
+        "@com_github_crossplane_crossplane_runtime//pkg/controller",
+        "@com_github_crossplane_crossplane_runtime//pkg/event",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)

@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "provider_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/cmd/provider",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//apis",
+        "//apis/v1alpha1",
+        "//pkg/controller",
+        "//pkg/features",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/controller",
+        "@com_github_crossplane_crossplane_runtime//pkg/feature",
+        "@com_github_crossplane_crossplane_runtime//pkg/logging",
+        "@com_github_crossplane_crossplane_runtime//pkg/ratelimiter",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@in_gopkg_alecthomas_kingpin_v2//:kingpin_v2",
+        "@io_k8s_apimachinery//pkg/api/errors",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_client_go//tools/leaderelection/resourcelock",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/log/zap",
+    ],
+)
+
+go_binary(
+    name = "provider",
+    embed = [":provider_lib"],
+    visibility = ["//visibility:public"],
+)

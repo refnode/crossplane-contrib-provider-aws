@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fake",
+    srcs = [
+        "accesskey.go",
+        "group.go",
+        "grouppolicyattachment.go",
+        "groupusermembership.go",
+        "openidconnectprovider.go",
+        "policy.go",
+        "role.go",
+        "rolepolicyattachment.go",
+        "user.go",
+        "userpolicyattachment.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/iam/fake",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/clients/iam",
+        "@com_github_aws_aws_sdk_go_v2_service_iam//:iam",
+        "@com_github_aws_aws_sdk_go_v2_service_sts//:sts",
+    ],
+)

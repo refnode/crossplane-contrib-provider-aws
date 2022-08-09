@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "v1beta1",
+    srcs = [
+        "doc.go",
+        "fargate_profile_types.go",
+        "register.go",
+        "types.go",
+        "zz_generated.deepcopy.go",
+        "zz_generated.managed.go",
+        "zz_generated.managedlist.go",
+        "zz_generated.resolvers.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/apis/eks/v1beta1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/ec2/v1beta1",
+        "//apis/iam/v1beta1",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/reference",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/runtime",
+        "@io_k8s_apimachinery//pkg/runtime/schema",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+        "@io_k8s_sigs_controller_runtime//pkg/scheme",
+    ],
+)

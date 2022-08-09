@@ -1,0 +1,55 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "eks",
+    srcs = [
+        "eks.go",
+        "fargateprofile.go",
+        "identityproviderconfig.go",
+        "nodegroup.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/eks",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/eks/manualv1alpha1",
+        "//apis/eks/v1beta1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2//aws/signer/v4:signer",
+        "@com_github_aws_aws_sdk_go_v2_service_eks//:eks",
+        "@com_github_aws_aws_sdk_go_v2_service_eks//types",
+        "@com_github_aws_aws_sdk_go_v2_service_sts//:sts",
+        "@com_github_aws_smithy_go//transport/http",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_client_go//tools/clientcmd",
+        "@io_k8s_client_go//tools/clientcmd/api",
+    ],
+)
+
+go_test(
+    name = "eks_test",
+    srcs = [
+        "eks_test.go",
+        "fargateprofile_test.go",
+        "identityproviderconfig_test.go",
+        "nodegroup_test.go",
+    ],
+    embed = [":eks"],
+    deps = [
+        "//apis/eks/manualv1alpha1",
+        "//apis/eks/v1beta1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_eks//:eks",
+        "@com_github_aws_aws_sdk_go_v2_service_eks//types",
+        "@com_github_aws_smithy_go//document",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+    ],
+)

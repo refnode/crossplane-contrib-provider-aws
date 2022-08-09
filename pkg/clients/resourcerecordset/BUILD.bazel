@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "resourcerecordset",
+    srcs = ["resourcerecordset.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/resourcerecordset",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/route53/v1alpha1",
+        "//pkg/clients",
+        "//pkg/clients/hostedzone",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_route53//:route53",
+        "@com_github_aws_aws_sdk_go_v2_service_route53//types",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_google_go_cmp//cmp/cmpopts",
+    ],
+)
+
+go_test(
+    name = "resourcerecordset_test",
+    srcs = ["resourcerecordset_test.go"],
+    embed = [":resourcerecordset"],
+    deps = [
+        "//apis/route53/v1alpha1",
+        "@com_github_aws_aws_sdk_go_v2_service_route53//types",
+        "@com_github_google_go_cmp//cmp",
+    ],
+)

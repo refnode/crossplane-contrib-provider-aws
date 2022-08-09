@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "servicediscovery",
+    srcs = ["servicediscovery.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/servicediscovery",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_aws_aws_sdk_go//service/servicediscovery/servicediscoveryiface"],
+)

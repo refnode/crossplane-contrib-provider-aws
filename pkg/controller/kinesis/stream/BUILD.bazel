@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "stream",
+    srcs = [
+        "setup.go",
+        "zz_controller.go",
+        "zz_conversions.go",
+    ],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/controller/kinesis/stream",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/kinesis/v1alpha1",
+        "//apis/v1alpha1",
+        "//pkg/clients",
+        "//pkg/features",
+        "@com_github_aws_aws_sdk_go//aws/awserr",
+        "@com_github_aws_aws_sdk_go//service/kinesis",
+        "@com_github_aws_aws_sdk_go//service/kinesis/kinesisiface",
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_crossplane_crossplane_runtime//pkg/connection",
+        "@com_github_crossplane_crossplane_runtime//pkg/controller",
+        "@com_github_crossplane_crossplane_runtime//pkg/event",
+        "@com_github_crossplane_crossplane_runtime//pkg/meta",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/managed",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)

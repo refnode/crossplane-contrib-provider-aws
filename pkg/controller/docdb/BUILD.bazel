@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "docdb",
+    srcs = ["tags.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/controller/docdb",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/docdb/v1alpha1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go//service/docdb",
+        "@com_github_aws_aws_sdk_go//service/docdb/docdbiface",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@com_github_pkg_errors//:errors",
+    ],
+)

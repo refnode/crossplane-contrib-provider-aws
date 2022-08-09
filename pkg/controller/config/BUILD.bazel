@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "config",
+    srcs = ["config.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/controller/config",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/v1beta1",
+        "@com_github_crossplane_crossplane_runtime//pkg/controller",
+        "@com_github_crossplane_crossplane_runtime//pkg/event",
+        "@com_github_crossplane_crossplane_runtime//pkg/reconciler/providerconfig",
+        "@com_github_crossplane_crossplane_runtime//pkg/resource",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/source",
+    ],
+)

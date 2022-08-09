@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "hostedzone",
+    srcs = ["hostedzone.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/hostedzone",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//apis/route53/v1alpha1",
+        "//pkg/clients",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_route53//:route53",
+        "@com_github_aws_aws_sdk_go_v2_service_route53//types",
+    ],
+)
+
+go_test(
+    name = "hostedzone_test",
+    srcs = ["hostedzone_test.go"],
+    embed = [":hostedzone"],
+    deps = [
+        "@com_github_aws_aws_sdk_go_v2_service_route53//types",
+        "@com_github_aws_smithy_go//:smithy-go",
+    ],
+)

@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cognitoidentityprovider",
+    srcs = ["mock.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/mock/cognitoidentityprovider",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_crossplane_crossplane_runtime//apis/common/v1:common",
+        "@com_github_golang_mock//gomock",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)

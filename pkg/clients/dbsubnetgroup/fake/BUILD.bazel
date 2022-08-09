@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fake",
+    srcs = ["dbsubnetgroup.go"],
+    importpath = "github.com/crossplane-contrib/provider-aws/pkg/clients/dbsubnetgroup/fake",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/clients/dbsubnetgroup",
+        "@com_github_aws_aws_sdk_go_v2_service_rds//:rds",
+    ],
+)
