@@ -4,6 +4,7 @@ go_library(
     name = "ec2",
     srcs = [
         "address.go",
+        "flowlogs.go",
         "instance.go",
         "internetgateway.go",
         "natgateway.go",

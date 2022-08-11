@@ -4,6 +4,7 @@ go_library(
     name = "v1alpha1",
     srcs = [
         "custom_types.go",
+        "referencers.go",
         "zz_doc.go",
         "zz_enums.go",
         "zz_generated.deepcopy.go",
