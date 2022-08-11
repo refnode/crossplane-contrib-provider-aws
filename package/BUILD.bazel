@@ -1,0 +1,16 @@
+filegroup(
+    name = "crossplane_package_metadata",
+    src = [
+        "crossplane.yaml",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "crossplane_package_data",
+    src = [
+        "//package:crossplane_package_metadata",
+        "//package/crds",
+    ],
+    visibility = ["//visibility:public"],
+)
